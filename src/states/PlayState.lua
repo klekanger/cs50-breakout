@@ -133,8 +133,12 @@ function PlayState:update(dt)
 
                 -- Assignment 2: 
                 -- random powerup at random intervals when hitting brick
-                if math.random(100) < 10 then  -- % chance
-                    powertype = math.random(10) --random powerup
+                if math.random(100) < 20 then  -- % chance of getting a powerup
+                    if math.random(100) < 25 then -- if powerup, 25 % chance it's a key
+                        powertype = 10
+                    else
+                        powertype = math.random(9) --random powerup
+                    end
                     pwr = Powerup(powertype, ball.x, ball.y)
                     table.insert(self.powerups, pwr)
                 end
