@@ -27,7 +27,8 @@ function PlayState:enter(params)
     self.score = params.score
     self.highScores = params.highScores
 
-    -- GD50: allow more than one ball
+    -- Assignment 2: 
+    -- allow more than one ball
     self.balls = {params.ball}
     self.numBalls = 1
 
@@ -38,15 +39,17 @@ function PlayState:enter(params)
     self.balls[1].dx = math.random(-200, 200)
     self.balls[1].dy = math.random(-50, -60)
 
+    -- Assignment 2:
     -- Table with powerups 
+    -- Keep track of whether the user has the key powerup or not
     self.powerups = {}
+    self.key = false
 
 end
 
 
 
 function PlayState:update(dt)
-
     if self.paused then
         if love.keyboard.wasPressed('space') then
             self.paused = false
@@ -63,7 +66,7 @@ function PlayState:update(dt)
     -- update paddle position
     self.paddle:update(dt)
 
-    -- CS50G
+    -- Assignment 2:
     -- update multiple balls
     for k, ball in pairs(self.balls) do 
 
@@ -95,11 +98,19 @@ function PlayState:update(dt)
             -- only check collision if we're in play
             if brick.inPlay and ball:collides(brick) then
 
-                -- add to score
-                self.score = self.score + (brick.tier * 200 + brick.color * 25)
 
                 -- trigger the brick's hit function, which removes it from play
-                brick:hit()
+                -- Assignment 2: pass in to Brick whether the player has the key or not
+                -- Give more points if unlocking locked brick
+                if self.key and brick.locked then
+                    self.score = self.score + 5000
+                elseif brick.locked then
+                    -- Do not give points when brick is locked
+                else 
+                    self.score = self.score + (brick.tier * 200 + brick.color * 25)
+                end
+                
+                brick:hit(self.key)
 
                 -- if we have enough points, recover a point of health
                 if self.score > self.recoverPoints then
@@ -109,7 +120,7 @@ function PlayState:update(dt)
                     -- multiply recover points by 2
                     self.recoverPoints = math.min(100000, self.recoverPoints * 2)
 
-                    -- CS50G 
+                    -- Assignment 2: 
                     -- Increase size of paddle
                     if self.paddle.size < 4 then
                         self.paddle:resize(self.paddle.size + 1)
@@ -120,7 +131,7 @@ function PlayState:update(dt)
                 end
 
 
-                -- CS50G: 
+                -- Assignment 2: 
                 -- random powerup at random intervals when hitting brick
                 if math.random(100) < 5 then  -- % chance
                     powertype = math.random(10) --random powerup
@@ -201,7 +212,7 @@ function PlayState:update(dt)
             table.insert(self.powerups, pwr)
         end
 
-        -- CS50G:
+        -- Assignment 2:
         -- Update powerup +
         -- collision detection for powerup and paddle
         for k, powerup in pairs(self.powerups) do
@@ -210,7 +221,10 @@ function PlayState:update(dt)
                 gSounds['power']:play()
                 if powerup.powertype < 10 then
                      self:bonusBalls()  
-                end         
+                end       
+                if powerup.powertype == 10 then
+                    self.key = true
+                end  
                 table.remove(self.powerups, k)
             end
             -- remove powerup from table when outside screen
@@ -226,7 +240,7 @@ function PlayState:update(dt)
                 self.health = self.health - 1
                 gSounds['hurt']:play()
 
-                -- CS50G
+                -- Assignment 2:
                 -- Decrease size of paddle when loosing one heart
                 if self.paddle.size > 1 then
                     self.paddle:resize(self.paddle.size -1)
@@ -295,6 +309,12 @@ function PlayState:render()
 
     renderScore(self.score)
     renderHealth(self.health)
+
+    -- Assignment 2:
+    -- Show key symbol if player has key powerup
+    if self.key then
+        love.graphics.draw(gTextures['main'], gFrames['power'][10],VIRTUAL_WIDTH - 116, 3, 0, 0.6)
+    end
 
     -- pause text, if paused
     if self.paused then

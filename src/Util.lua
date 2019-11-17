@@ -54,8 +54,13 @@ end
     sprite sheet. Since the sprite sheet has non-uniform sprites within,
     we have to return a subset of GenerateQuads.
 ]]
+
+-- Assignment 2
+-- Added locked brick 
 function GenerateQuadsBricks(atlas)
-    return table.slice(GenerateQuads(atlas, 32, 16), 1, 21)
+    local allBricks = table.slice(GenerateQuads(atlas, 32, 16), 1, 21)
+    table.insert(allBricks, love.graphics.newQuad(32*5,16*3, 32, 16, atlas:getDimensions()))
+    return allBricks
 end
 
 --[[

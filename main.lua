@@ -61,6 +61,7 @@ function love.load()
 
     -- Quads we will generate for all of our textures; Quads allow us
     -- to show only part of a texture and not the entire thing
+    -- Asssignment 2: Added powerup 
     gFrames = {
         ['arrows'] = GenerateQuads(gTextures['arrows'], 24, 24),
         ['paddles'] = GenerateQuadsPaddles(gTextures['main']),
@@ -80,6 +81,7 @@ function love.load()
 
     -- set up our sound effects; later, we can just index this table and
     -- call each entry's `play` method
+    -- Assignment 2: Added powerup sound effect
     gSounds = {
         ['paddle-hit'] = love.audio.newSource('sounds/paddle_hit.wav'),
         ['score'] = love.audio.newSource('sounds/score.wav'),
@@ -95,7 +97,8 @@ function love.load()
         ['high-score'] = love.audio.newSource('sounds/high_score.wav'),
         ['pause'] = love.audio.newSource('sounds/pause.wav'),
         ['power'] = love.audio.newSource('sounds/powerup.wav'),
-        ['music'] = love.audio.newSource('sounds/music.wav')
+        ['music'] = love.audio.newSource('sounds/music.wav'),
+        ['locked'] = love.audio.newSource('sounds/locked.wav')
     }
 
     -- the state machine we'll be using to transition between various states

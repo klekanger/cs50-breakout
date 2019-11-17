@@ -67,7 +67,7 @@ function Paddle:update(dt)
     end
 end
 
--- CS50G
+-- Assignment 2:
 -- Resize the paddle 
 function Paddle:resize(newsize) 
     self.size = newsize

@@ -1,5 +1,6 @@
 --[[ 
     CS50G 
+    Assignment 2
 
     -- Powerup Class
     Author: Kurt Lekanger
