@@ -211,7 +211,7 @@ function love.draw()
     gStateMachine:render()
     
     -- display FPS for debugging; simply comment out to remove
-    displayFPS()
+    -- displayFPS()
     
     push:apply('end')
 end

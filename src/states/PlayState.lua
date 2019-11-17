@@ -133,7 +133,7 @@ function PlayState:update(dt)
 
                 -- Assignment 2: 
                 -- random powerup at random intervals when hitting brick
-                if math.random(100) < 5 then  -- % chance
+                if math.random(100) < 10 then  -- % chance
                     powertype = math.random(10) --random powerup
                     pwr = Powerup(powertype, ball.x, ball.y)
                     table.insert(self.powerups, pwr)
@@ -203,13 +203,6 @@ function PlayState:update(dt)
                 -- only allow colliding with one brick, for corners
                 break
             end
-        end
-
-        -- DEBUG CODE - REMOVE
-        -- SPAWN KEY POWERUP
-        if love.keyboard.wasPressed('1') then
-            pwr = Powerup(10, ball.x, ball.y)
-            table.insert(self.powerups, pwr)
         end
 
         -- Assignment 2:

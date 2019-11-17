@@ -16,7 +16,7 @@
 NONE = 1
 SINGLE_PYRAMID = 2
 MULTI_PYRAMID = 3
-LOCK_PROBABILITY = 40 -- Assignment2: Probability of locked bricks
+LOCK_PROBABILITY = 5 -- Assignment2: Probability of locked bricks
 
 -- per-row patterns
 SOLID = 1           -- all colors the same in this row
