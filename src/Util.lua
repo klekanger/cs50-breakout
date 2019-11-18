@@ -131,6 +131,9 @@ function GenerateQuadsBalls(atlas)
     return quads
 end
 
+-- Assignment 2
+-- Generate powerup quads
+
 function GenerateQuadsPowerUps(atlas)
     local x = 0
     local y = 192

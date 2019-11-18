@@ -85,7 +85,6 @@ function LevelMaker.createMap(level)
                 skipFlag = not skipFlag
             end
 
-
             -- Assignment 2:
             -- code to make random locked bricks
 

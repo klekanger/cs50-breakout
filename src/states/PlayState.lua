@@ -47,8 +47,6 @@ function PlayState:enter(params)
 
 end
 
-
-
 function PlayState:update(dt)
     if self.paused then
         if love.keyboard.wasPressed('space') then
@@ -98,7 +96,6 @@ function PlayState:update(dt)
             -- only check collision if we're in play
             if brick.inPlay and ball:collides(brick) then
 
-
                 -- trigger the brick's hit function, which removes it from play
                 -- Assignment 2: pass in to Brick whether the player has the key or not
                 -- Give more points if unlocking locked brick
@@ -129,7 +126,6 @@ function PlayState:update(dt)
                     -- play recover sound effect
                     gSounds['recover']:play()
                 end
-
 
                 -- Assignment 2: 
                 -- random powerup at random intervals when hitting brick
@@ -230,7 +226,6 @@ function PlayState:update(dt)
             end
         end
 
-
         -- if ball goes below bounds, revert to serve state and decrease health
         if ball.y >= VIRTUAL_HEIGHT then
             if self.numBalls <= 1 then 
@@ -275,12 +270,7 @@ function PlayState:update(dt)
     if love.keyboard.wasPressed('escape') then
         love.event.quit()
     end
-
-
-
 end
-
-
 
 function PlayState:render()
     -- render bricks
@@ -302,7 +292,6 @@ function PlayState:render()
     for k, powerup in pairs(self.powerups) do
         powerup:render()
     end
-
 
     renderScore(self.score)
     renderHealth(self.health)
@@ -334,7 +323,6 @@ end
 -- function for ekstra balls
 
 function PlayState:bonusBalls()
-
     if self.numBalls == 1 then
         ball2 = Ball(math.random(7))
         ball3 = Ball(math.random(7))
@@ -353,5 +341,4 @@ function PlayState:bonusBalls()
         table.insert(self.balls, ball3)
         self.numBalls = 3
     end
-
 end
